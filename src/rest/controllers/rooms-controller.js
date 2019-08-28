@@ -1,5 +1,5 @@
-const server = require('./../server.js');
-var db = require('./../db.js');
+const server = require('../../server.js');
+var db = require('../../db.js');
 const io = server.io;
 
 exports.addMessage = (req,res) =>{

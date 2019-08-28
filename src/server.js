@@ -24,6 +24,6 @@ module.exports = {
     }
 };
 
-const roomsRouter = require('./routes/rooms-router');
+const roomsRouter = require('./rest/routes/rooms-router');
 app.use('/rooms',roomsRouter);
 

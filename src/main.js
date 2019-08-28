@@ -2,7 +2,7 @@ const consoleUtils = require('./console.js');
 const db = require('./db.js');
 const server = require('./server.js');
 const port = require('./utils').port;
-const socketController = require('./socket-controller');
+const socketController = require('./socket/routes/socket-router');
 
 db.connect().then(() =>{
     startListening();
@@ -13,7 +13,7 @@ db.connect().then(() =>{
 })
 
 function startListening(){
-    socketController.start();
+    socketController.startListening();
       
     server.httpServer.listen(port, () => {
         console.log('listening on ' + port);

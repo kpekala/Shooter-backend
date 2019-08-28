@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const controller = require('./../controllers/rooms-controller.js')
+const controller = require('./../controllers/rooms-controller')
 
 router.post('/:roomId/messages/', controller.addMessage);
 
