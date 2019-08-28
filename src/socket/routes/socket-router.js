@@ -4,17 +4,24 @@ const roomsController = require('./../controllers/rooms-controller');
 
 class SocketRouter{
     
-    startListening(){
+    listen(){
         io.on('connection', socket => {
             console.log('a user connected');
             socket.on('newPlayer', (data) =>{
                 const {roomId, playerName} = data;
                 roomsController.addNewPlayerToRoom(playerName,roomId);
+                socket.join(roomId);
+                socket.on('startGame', (data) =>{
+                    io.sockets.in(roomId).emit('gameStarted',true);
+                    this.listenGame(roomId, socket);
+                })
             })
-            socket.on('startGame', (data) =>{
-                
-            })
+            
         });
+    }
+
+    listenGame(roomId, socket){
+
     }
 }
 

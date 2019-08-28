@@ -13,7 +13,7 @@ db.connect().then(() =>{
 })
 
 function startListening(){
-    socketController.startListening();
+    socketController.listen();
       
     server.httpServer.listen(port, () => {
         console.log('listening on ' + port);
