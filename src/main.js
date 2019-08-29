@@ -1,8 +1,9 @@
 const consoleUtils = require('./console.js');
 const db = require('./db.js');
-const server = require('./server.js');
+const server = require('./server');
 const port = require('./utils').port;
-const socketController = require('./socket/routes/socket-router');
+const SocketRouter = require('./socket/routes/socket-router');
+const socketRouter = new SocketRouter();
 
 db.connect().then(() =>{
     startListening();
@@ -13,7 +14,7 @@ db.connect().then(() =>{
 })
 
 function startListening(){
-    socketController.listen();
+    socketRouter.listen();
       
     server.httpServer.listen(port, () => {
         console.log('listening on ' + port);

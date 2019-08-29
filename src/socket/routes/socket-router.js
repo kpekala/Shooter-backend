@@ -1,6 +1,7 @@
 const io = require('../../server').io;
 const db = require('../../db');
-const roomsController = require('./../controllers/rooms-controller');
+const roomsController = require('./../../controllers/rooms-controller');
+const gameController = require('./../../controllers/game-controller');
 
 class SocketRouter{
     
@@ -12,17 +13,20 @@ class SocketRouter{
                 roomsController.addNewPlayerToRoom(playerName,roomId);
                 socket.join(roomId);
                 socket.on('startGame', (data) =>{
-                    io.sockets.in(roomId).emit('gameStarted',true);
-                    this.listenGame(roomId, socket);
+                    io.sockets.in(roomId).emit('gameStarted');
                 })
+                this.listenPreGame(playerName, roomId, socket);
             })
             
         });
     }
 
-    listenGame(roomId, socket){
-
+    listenPreGame(playerName, roomId, socket){
+        socket.on('playerReady',(data) =>{
+            console.log('player ready!')
+            gameController.onPlayerReady(playerName,roomId);
+        })
     }
 }
 
-module.exports = new SocketRouter();
+module.exports = SocketRouter;
