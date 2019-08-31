@@ -25,6 +25,13 @@ class SocketRouter{
         socket.on('playerReady',(data) =>{
             console.log('player ready!')
             gameController.onPlayerReady(playerName,roomId);
+            this.listenGame(socket, roomId);
+        })
+    }
+
+    listenGame(socket, roomId){
+        socket.on('playerUpdate',(data) => {
+            gameController.onPlayerUpdate(data, roomId);
         })
     }
 }
