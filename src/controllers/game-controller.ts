@@ -13,8 +13,3 @@ exports.onPlayerReady = (playerName: string,roomId: string) =>{
         io.sockets.in(roomId).emit('startPosition', playersWithPosition);
     }
 }
-
-
-exports.onPlayerUpdate = (player: Player, roomId: string) =>{
-    io.sockets.in(roomId).emit('enemyUpdate',player);
-}

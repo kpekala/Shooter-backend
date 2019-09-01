@@ -31,7 +31,11 @@ class SocketRouter{
 
     listenGame(socket, roomId){
         socket.on('playerUpdate',(data) => {
-            gameController.onPlayerUpdate(data, roomId);
+            io.sockets.in(roomId).emit('enemyUpdate',data);
+        })
+        socket.on('removedBlock', (data) =>{
+            console.log('gotten removed block: ',data);
+            io.sockets.in(roomId).emit('removedBlock',data);
         })
     }
 }
