@@ -4,17 +4,15 @@ import roomsContainer from './rooms-container';
 
 class Foo{
     onA(){
-        let b = new Bar();
-        b.fireA(this.a);
+        
     }
-    a(){
+    f(){
         console.log('it works!')
     }
 }
-class Bar{
-    fireA(a){
-        a();
+class Bar extends Foo{
+    b(){
+        console.log('buuu!');
     }
 }
 let foo = new Foo();
-foo.onA();
