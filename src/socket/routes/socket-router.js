@@ -40,8 +40,11 @@ class SocketRouter{
             io.sockets.in(roomId).emit('newEnemyGun',data);
         })
         socket.on('newPlayerBullet', (data) => {
-            console.log('gotten bullet update: ',data);
             io.sockets.in(roomId).emit('newEnemyBullet',data);
+        })
+        socket.on('bulletRemoved', (data) => {
+            console.log('gotten removed bullet: ',data);
+            io.sockets.in(roomId).emit('bulletRemoved',data);
         })
     }
 }
