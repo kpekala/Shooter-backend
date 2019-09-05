@@ -46,6 +46,10 @@ class SocketRouter{
             console.log('gotten removed bullet: ',data);
             io.sockets.in(roomId).emit('bulletRemoved',data);
         })
+        socket.on('enemyIsHit', (data) => {
+            console.log('gotten hit enemy: ',data);
+            io.sockets.in(roomId).emit('enemyIsHit',data);
+        })
     }
 }
 
