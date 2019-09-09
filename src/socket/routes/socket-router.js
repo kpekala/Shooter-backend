@@ -43,12 +43,14 @@ class SocketRouter{
             io.sockets.in(roomId).emit('newEnemyBullet',data);
         })
         socket.on('bulletRemoved', (data) => {
-            console.log('gotten removed bullet: ',data);
             io.sockets.in(roomId).emit('bulletRemoved',data);
         })
         socket.on('enemyIsHit', (data) => {
-            console.log('gotten hit enemy: ',data);
             io.sockets.in(roomId).emit('enemyIsHit',data);
+        })
+        socket.on('playerIsDead', (data) => {
+            console.log('gotten player dead: ',data);
+            io.sockets.in(roomId).emit('enemyIsDead',data);
         })
     }
 }
