@@ -9,8 +9,13 @@ exports.onPlayerReady = (playerName: string,roomId: string) =>{
     room.increaseNumberOfReadyPlayers(1);
 
     if(room.arePlayersReady()){
-        let playersWithPosition = gameLogic.playersWithInitialPosition(room.players);
-        io.sockets.in(roomId).emit('startPosition', playersWithPosition);
+        let mapId = gameLogic.getRandomMapId();
+        let playersWithPosition = gameLogic.playersWithInitialPosition(room.players, mapId);
+        let data = {
+            players: playersWithPosition,
+            map: mapId
+        }
+        io.sockets.in(roomId).emit('initialData', data);
 
         let guns = gameLogic.generateGunsPostions();
         console.log('sending guns!', guns);

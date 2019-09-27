@@ -1,19 +1,27 @@
 import Player from "../model/player";
 import Gun from "../model/gun";
+import { numberOfMaps, numberOfGuns, gameWidth, gameHeight, blockSizeInPx, mapPositions } from "./game-utils";
 
-let numberOfGuns = 10;
-let gameWidth = 1400;
-let gameHeight = 800;
-const blockSizeInPx = 30;
+export function playersWithInitialPosition(players: Array<Player>, mapId: number){
+    let positions = mapPositions[mapId];
+    let currentPosIndex = 0;
+    for(let player of players){
+        if(currentPosIndex >= positions.length){
+            currentPosIndex = 0;
+        }
+        let playerPos = positions[currentPosIndex];
+        player.x = playerPos.x;
+        player.y = playerPos.y;
 
-export function playersWithInitialPosition(players: Array<Player>){
-    //very basic generation of players positions.
-    //Made for testing purposes
-    for(let i = 0; i< players.length; i++){
-        players[i].x = i* 80;
-        players[i].y = 100;
+        currentPosIndex++;
     }
     return players;
+}
+
+export function getRandomMapId(){
+    let mapId = Math.floor((Math.random() * numberOfMaps) % numberOfMaps);
+    console.log(`mapId: ${mapId}`);
+    return mapId;
 }
 
 export function generateGunsPostions(){
